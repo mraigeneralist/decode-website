@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+  --bg-card: #111111;
+  --bg-float: #181818;
+  --border: #1f1f1f;
+  --border-mid: #2a2a2a;
+  --accent: #c8302e;
+  --accent-hover: #a82624;
+  --accent-glow: rgba(200, 48, 46, 0.18);
+  --muted: #8a8a8a;
+  --destructive: #ef4444;
+  --success: #25d366;
+  --warning: #f59e0b;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h: 80px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--bg-card);
+  --color-float: var(--bg-float);
+  --color-border: var(--border);
+  --color-border-mid: var(--border-mid);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-glow: var(--accent-glow);
+  --color-muted: var(--muted);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --font-display: var(--font-bebas);
+  --font-sans: var(--font-geist);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+.display {
+  font-family: var(--font-bebas), system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+}
+
+.g-tex {
+  background-color: var(--background);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.diag {
+  background:
+    linear-gradient(135deg, transparent 49.5%, var(--accent) 49.5%, var(--accent) 50.5%, transparent 50.5%);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  transition: background 0.2s var(--ease-spring), transform 0.2s var(--ease-spring);
+}
+.btn-accent:hover {
+  background: var(--accent-hover);
+}
+.btn-accent:active { transform: translateY(1px); }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.card-float {
+  background: var(--bg-float);
+  border: 1px solid var(--border-mid);
+  border-radius: 14px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.au1 { opacity: 0; animation: fadeUp 0.7s var(--ease-spring) 0.05s forwards; }
+.au2 { opacity: 0; animation: fadeUp 0.7s var(--ease-spring) 0.18s forwards; }
+.au3 { opacity: 0; animation: fadeUp 0.7s var(--ease-spring) 0.32s forwards; }
+.au4 { opacity: 0; animation: fadeUp 0.7s var(--ease-spring) 0.46s forwards; }
+
+.rdp-root {
+  --rdp-accent-color: var(--accent);
+  --rdp-accent-background-color: var(--accent-glow);
+  --rdp-day-disabled-color: var(--muted);
+  --rdp-day_button-border: 1px solid var(--border-mid);
+  color: var(--foreground);
+}
+
+input, textarea, select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  color: var(--foreground);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.18s var(--ease-spring);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
