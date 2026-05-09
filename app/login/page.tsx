@@ -34,13 +34,10 @@ export default function LoginPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-32 pb-16 px-5 sm:px-8">
+      <main className="flex-1 pt-[calc(var(--nav-h)+5rem)] pb-20 px-8 max-[640px]:px-5">
         <div className="max-w-md mx-auto">
-          <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)] mb-3">
-            <span className="inline-block w-8 h-px bg-[var(--accent)] mr-3 align-middle" />
-            Admin
-          </div>
-          <h1 className="display text-5xl mb-8">Sign in.</h1>
+          <p className="eyebrow mb-4">Admin</p>
+          <h1 className="display text-[clamp(2.5rem,6vw,4.5rem)] mb-10">Sign in.</h1>
 
           <form onSubmit={onSubmit} className="space-y-4">
             <div className="flex flex-col">

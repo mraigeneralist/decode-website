@@ -27,13 +27,10 @@ export default async function BookPage({
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-32 pb-16 px-5 sm:px-8">
+      <main className="flex-1 pt-[calc(var(--nav-h)+5rem)] pb-20 px-8 max-[640px]:px-5">
         <div className="max-w-3xl mx-auto">
-          <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)] mb-3">
-            <span className="inline-block w-8 h-px bg-[var(--accent)] mr-3 align-middle" />
-            Schedule
-          </div>
-          <h1 className="display text-[clamp(40px,7vw,84px)] mb-10">Book your slot.</h1>
+          <p className="eyebrow mb-4">Schedule</p>
+          <h1 className="display text-[clamp(2.5rem,7vw,5.4rem)] mb-10">Book your slot.</h1>
 
           {services.length === 0 ? (
             <div className="card p-10 text-[var(--muted)]">

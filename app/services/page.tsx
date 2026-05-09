@@ -3,7 +3,7 @@ import Footer from "@/components/ui/Footer";
 import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase-server";
 import type { Service } from "@/lib/types";
-import { VEHICLE_TYPES, formatPrice } from "@/lib/constants";
+import { VEHICLE_TYPES } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
 
@@ -23,16 +23,13 @@ export default async function ServicesPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-32 pb-16 px-5 sm:px-8">
-        <div className="max-w-7xl mx-auto">
+      <main className="flex-1 pt-[calc(var(--nav-h)+5rem)] pb-20 px-8 max-[640px]:px-5">
+        <div className="max-w-[1240px] mx-auto">
           <header className="mb-14">
-            <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)] mb-3">
-              <span className="inline-block w-8 h-px bg-[var(--accent)] mr-3 align-middle" />
-              Catalog
-            </div>
-            <h1 className="display text-[clamp(48px,8vw,108px)]">Services & Pricing.</h1>
-            <p className="mt-5 max-w-2xl text-[var(--foreground)]/75">
-              All prices are inclusive of consumables. Final price depends on vehicle category.
+            <p className="eyebrow mb-4">Catalog</p>
+            <h1 className="display text-[clamp(2.8rem,8vw,7rem)]">Services & Pricing.</h1>
+            <p className="mt-5 max-w-2xl text-[var(--muted-2)] leading-[1.8] text-[0.95rem]">
+              Per-vehicle pricing, inclusive of consumables. Final price depends on vehicle category and condition.
               Pick yours, then book online or message us on WhatsApp.
             </p>
           </header>
@@ -43,26 +40,34 @@ export default async function ServicesPage() {
             </div>
           ) : (
             <div className="space-y-10">
-              {services.map((s) => (
-                <article key={s.id} className="card p-6 sm:p-10">
-                  <div className="grid md:grid-cols-12 gap-6">
+              {services.map((s, i) => (
+                <article
+                  key={s.id}
+                  className="group bg-[var(--bg-card)] border border-[var(--border)] p-8 max-[640px]:p-6 relative overflow-hidden hover:bg-[var(--bg-float)] transition-colors duration-300"
+                >
+                  <div className="grid md:grid-cols-12 gap-8">
                     <div className="md:col-span-4">
-                      <div className="display text-3xl sm:text-4xl mb-3">{s.name}</div>
-                      <p className="text-sm text-[var(--foreground)]/75 leading-relaxed">{s.description}</p>
+                      <div className="display text-[2.4rem] max-[640px]:text-[1.8rem] mb-2">{s.name}</div>
+                      <div className="text-[0.65rem] tracking-[0.22em] uppercase text-[var(--muted)] mb-4">
+                        {String(i + 1).padStart(2, "0")} / {services.length.toString().padStart(2, "0")}
+                      </div>
+                      <p className="text-[0.9rem] text-[var(--muted-2)] leading-[1.8]">{s.description}</p>
                     </div>
                     <div className="md:col-span-8">
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--border)]">
                         {VEHICLE_TYPES.map((vt) => {
                           const price = (s.prices as Record<string, number>)?.[vt.id] ?? 0;
                           return (
                             <div
                               key={vt.id}
-                              className="card-float p-4 text-center"
+                              className="bg-[var(--bg-card)] p-5 text-center"
                             >
-                              <div className="text-xs uppercase tracking-[0.15em] text-[var(--muted)] mb-2">
+                              <div className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--muted)] mb-2">
                                 {vt.name}
                               </div>
-                              <div className="text-lg font-semibold">{formatPrice(price)}</div>
+                              <div className="display text-[1.4rem]" style={price ? { color: "var(--foreground)" } : { color: "var(--muted)" }}>
+                                {price ? `₹${price.toLocaleString("en-IN")}` : "Quote"}
+                              </div>
                             </div>
                           );
                         })}
@@ -70,13 +75,15 @@ export default async function ServicesPage() {
                       <div className="mt-6 flex justify-end">
                         <Link
                           href={`/book?service=${s.id}`}
-                          className="btn-accent px-6 py-2.5 rounded-full text-sm font-semibold"
+                          className="btn-link"
                         >
-                          Book this →
+                          Book {s.name} →
                         </Link>
                       </div>
                     </div>
                   </div>
+                  <span className="bracket-tl" />
+                  <span className="bracket-br" />
                 </article>
               ))}
             </div>

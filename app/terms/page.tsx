@@ -5,12 +5,12 @@ export default function TermsPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-32 pb-16 px-5 sm:px-8">
+      <main className="flex-1 pt-[calc(var(--nav-h)+5rem)] pb-20 px-8 max-[640px]:px-5">
         <div className="max-w-3xl mx-auto">
-          <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)] mb-3">Legal</div>
-          <h1 className="display text-5xl mb-8">Terms of Service.</h1>
+          <p className="eyebrow mb-4">Legal</p>
+          <h1 className="display text-[clamp(2.5rem,6vw,4.5rem)] mb-10">Terms of Service.</h1>
 
-          <div className="space-y-6 text-[var(--foreground)]/80 leading-relaxed text-sm">
+          <div className="space-y-6 text-[var(--muted-2)] leading-[1.85] text-[0.92rem]">
             <p>
               Bookings are confirmed only after WhatsApp OTP verification. If you don't verify within
               5 minutes the slot is automatically released.

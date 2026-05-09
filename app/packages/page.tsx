@@ -48,53 +48,53 @@ export default function PackagesPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-32 pb-16 px-5 sm:px-8">
-        <div className="max-w-7xl mx-auto">
+      <main className="flex-1 pt-[calc(var(--nav-h)+5rem)] pb-20 px-8 max-[640px]:px-5">
+        <div className="max-w-[1240px] mx-auto">
           <header className="mb-14 max-w-3xl">
-            <div className="text-xs uppercase tracking-[0.3em] text-[var(--muted)] mb-3">
-              <span className="inline-block w-8 h-px bg-[var(--accent)] mr-3 align-middle" />
-              Bundled
-            </div>
-            <h1 className="display text-[clamp(48px,8vw,108px)]">Packages.</h1>
-            <p className="mt-5 text-[var(--foreground)]/75">
-              Pre-bundled service tiers. Pick one, save vs. à-la-carte. All prices vary by vehicle.
+            <p className="eyebrow mb-4">Bundled</p>
+            <h1 className="display text-[clamp(2.8rem,8vw,7rem)]">Packages.</h1>
+            <p className="mt-5 text-[var(--muted-2)] leading-[1.8] text-[0.95rem]">
+              Pre-bundled tiers. Pick one, save vs. à-la-carte. All prices vary by vehicle.
             </p>
           </header>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {PACKAGES.map((p) => (
+          <div className="grid md:grid-cols-3 gap-px bg-[var(--border)]">
+            {PACKAGES.map((p, i) => (
               <article
                 key={p.id}
-                className={`card p-7 flex flex-col ${
-                  p.featured ? "border-[var(--accent)]" : ""
+                className={`group bg-[var(--bg-card)] p-8 max-[640px]:p-6 relative overflow-hidden flex flex-col hover:bg-[var(--bg-float)] transition-colors duration-300 ${
+                  p.featured ? "border-l-2 border-l-[var(--accent)]" : ""
                 }`}
               >
                 {p.featured && (
-                  <div className="text-[10px] uppercase tracking-[0.3em] text-[var(--accent)] mb-3">
+                  <div className="text-[0.58rem] font-bold tracking-[0.18em] uppercase text-white bg-[var(--accent)] inline-block px-2 py-1 rounded-[2px] mb-5 self-start">
                     Most popular
                   </div>
                 )}
-                <div className="display text-4xl mb-2">{p.name}</div>
-                <div className="text-sm text-[var(--muted)] mb-5">{p.tagline}</div>
-                <div className="text-xl font-semibold mb-6">{p.price}</div>
-                <ul className="space-y-2 text-sm text-[var(--foreground)]/85 flex-1 mb-7">
+                <div className="text-[0.62rem] tracking-[0.22em] uppercase text-[var(--muted)] mb-2">
+                  Tier {String(i + 1).padStart(2, "0")}
+                </div>
+                <div className="display text-[3rem] leading-none mb-2">{p.name}</div>
+                <div className="text-[0.85rem] text-[var(--muted-2)] mb-6">{p.tagline}</div>
+                <div className="display text-[1.4rem] mb-7" style={{ color: "var(--accent-bright)" }}>
+                  {p.price}
+                </div>
+                <ul className="space-y-3 text-[0.88rem] text-[var(--muted-2)] flex-1 mb-8 leading-[1.6]">
                   {p.includes.map((item) => (
                     <li key={item} className="flex gap-3">
-                      <span style={{ color: "var(--accent)" }}>—</span>
+                      <span className="text-[var(--accent-bright)] mt-px">—</span>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
                 <Link
                   href="/book"
-                  className={
-                    p.featured
-                      ? "btn-accent text-center px-6 py-3 rounded-full text-sm font-semibold"
-                      : "text-center px-6 py-3 rounded-full border border-[var(--border-mid)] hover:border-[var(--accent)] text-sm font-semibold transition-colors"
-                  }
+                  className={p.featured ? "btn btn-primary" : "btn btn-ghost"}
                 >
                   Book {p.name}
                 </Link>
+                <span className="bracket-tl" />
+                <span className="bracket-br" />
               </article>
             ))}
           </div>
