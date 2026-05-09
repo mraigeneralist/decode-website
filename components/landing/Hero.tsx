@@ -104,26 +104,43 @@ export default function Hero() {
             sizes="(max-width: 768px) 0px, 50vw"
             className="object-cover object-[60%_40%] select-none pointer-events-none"
           />
-          {/* Soft fade at the seam so the panels feel joined, not hard-cut */}
+          {/* Overall shade — dim the whole image so it reads as atmosphere, not a focal photo */}
+          <div className="absolute inset-0 bg-black/45 pointer-events-none" />
+          {/* Strong fade at the seam so the panels blend into one shaded surface */}
           <div
-            className="absolute inset-y-0 left-0 w-32 pointer-events-none"
+            className="absolute inset-y-0 left-0 w-1/2 pointer-events-none"
             style={{
               background:
-                "linear-gradient(90deg, rgba(4,4,4,0.85) 0%, rgba(4,4,4,0.4) 50%, rgba(4,4,4,0) 100%)",
+                "linear-gradient(90deg, rgba(4,4,4,0.98) 0%, rgba(4,4,4,0.7) 35%, rgba(4,4,4,0.25) 75%, rgba(4,4,4,0) 100%)",
             }}
           />
           <div
-            className="absolute inset-y-0 right-0 w-24 pointer-events-none"
+            className="absolute inset-y-0 right-0 w-32 pointer-events-none"
             style={{
               background:
-                "linear-gradient(270deg, rgba(4,4,4,0.4) 0%, rgba(4,4,4,0) 100%)",
+                "linear-gradient(270deg, rgba(4,4,4,0.6) 0%, rgba(4,4,4,0) 100%)",
             }}
           />
           <div
-            className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+            className="absolute inset-x-0 top-0 h-32 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to top, rgba(4,4,4,0.7) 0%, transparent 100%)",
+                "linear-gradient(to bottom, rgba(4,4,4,0.5) 0%, transparent 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(4,4,4,0.85) 0%, transparent 100%)",
+            }}
+          />
+          {/* Subtle red glow on the image so the shade still reads as branded */}
+          <div
+            className="absolute inset-0 mix-blend-screen opacity-50 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 50% 60% at 60% 50%, rgba(200,48,46,0.18) 0%, transparent 65%)",
             }}
           />
           {/* Floating caption card */}
@@ -142,12 +159,6 @@ export default function Hero() {
 
       {/* Bottom hairline */}
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-60" />
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[3] hidden md:flex flex-col items-center gap-2 text-[var(--muted)]">
-        <div className="text-[0.6rem] tracking-[0.3em] uppercase">Scroll</div>
-        <div className="w-px h-10 bg-gradient-to-b from-[var(--accent-bright)] to-transparent" />
-      </div>
     </section>
   );
 }
