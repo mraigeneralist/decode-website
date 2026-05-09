@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import type { Service, VehicleType } from "@/lib/types";
@@ -63,18 +63,34 @@ export default function BookingFlow({
   const [confirmedRef, setConfirmedRef] = useState<string | null>(null);
   const [otp, setOtp] = useState("");
 
+  const rootRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [step, bookingId, confirmedRef]);
+
   function go(n: Step) {
     setError(null);
     setStep(n);
   }
 
   if (confirmedRef) {
-    return <Confirmed bookingRef={confirmedRef} state={state} />;
+    return (
+      <div ref={rootRef} className="scroll-mt-32">
+        <Confirmed bookingRef={confirmedRef} state={state} />
+      </div>
+    );
   }
 
   if (bookingId) {
     return (
-      <OTPStep
+      <div ref={rootRef} className="scroll-mt-32">
+        <OTPStep
         bookingId={bookingId}
         otp={otp}
         setOtp={setOtp}
@@ -99,11 +115,12 @@ export default function BookingFlow({
         submitting={submitting}
         error={error}
       />
+      </div>
     );
   }
 
   return (
-    <div>
+    <div ref={rootRef} className="scroll-mt-32">
       <Stepper step={step} />
 
       {step === 0 && (
@@ -329,31 +346,83 @@ export default function BookingFlow({
 }
 
 function Stepper({ step }: { step: number }) {
+  const total = STEP_LABELS.length;
+  const progressPct = (step / (total - 1)) * 100;
+
   return (
-    <div className="mb-10 flex flex-wrap gap-2">
-      {STEP_LABELS.map((label, i) => (
-        <div
-          key={label}
-          className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] flex-1 min-w-0"
-        >
-          <span
-            className="w-6 h-6 rounded-full border flex items-center justify-center font-semibold flex-shrink-0"
-            style={{
-              borderColor: i <= step ? "var(--accent)" : "var(--border-mid)",
-              background: i < step ? "var(--accent)" : "transparent",
-              color: i < step ? "#fff" : i === step ? "var(--accent)" : "var(--muted)",
-            }}
-          >
-            {i + 1}
-          </span>
-          <span className="hidden sm:inline truncate" style={{
-            color: i === step ? "var(--accent)" : i < step ? "var(--foreground)" : "var(--muted)",
-          }}>
-            {label}
-          </span>
+    <div className="mb-12 max-[640px]:mb-8">
+      <div className="hidden md:block">
+        <div className="relative flex items-start justify-between">
+          {/* Track */}
+          <div
+            className="absolute left-0 right-0 h-px bg-[var(--border-mid)]"
+            style={{ top: 13 }}
+          />
+          {/* Progress */}
+          <div
+            className="absolute left-0 h-px bg-[var(--accent)] transition-[width] duration-500 ease-out"
+            style={{ top: 13, width: `${progressPct}%` }}
+          />
+
+          {STEP_LABELS.map((label, i) => {
+            const done = i < step;
+            const active = i === step;
+            return (
+              <div key={label} className="relative flex flex-col items-center gap-3 z-10">
+                <div
+                  className={`w-7 h-7 rounded-[2px] flex items-center justify-center text-[0.65rem] font-bold transition-colors duration-300 ${
+                    done
+                      ? "bg-[var(--accent)] text-white border border-[var(--accent)]"
+                      : active
+                        ? "bg-[var(--background)] border border-[var(--accent)] text-[var(--accent-bright)]"
+                        : "bg-[var(--background)] border border-[var(--border-mid)] text-[var(--muted)]"
+                  }`}
+                >
+                  {done ? <CheckIcon /> : i + 1}
+                </div>
+                <div
+                  className={`text-[0.58rem] font-bold tracking-[0.22em] uppercase whitespace-nowrap transition-colors duration-300 ${
+                    active
+                      ? "text-[var(--accent-bright)]"
+                      : done
+                        ? "text-[var(--foreground)]"
+                        : "text-[var(--muted)]"
+                  }`}
+                >
+                  {label}
+                </div>
+              </div>
+            );
+          })}
         </div>
-      ))}
+      </div>
+
+      {/* Mobile: compact summary + progress bar */}
+      <div className="md:hidden">
+        <div className="flex items-baseline justify-between mb-3">
+          <div className="text-[0.62rem] font-bold tracking-[0.22em] uppercase text-[var(--muted)]">
+            Step {step + 1} of {total}
+          </div>
+          <div className="text-[0.78rem] font-bold tracking-[0.16em] uppercase text-[var(--accent-bright)]">
+            {STEP_LABELS[step]}
+          </div>
+        </div>
+        <div className="h-px bg-[var(--border-mid)] relative">
+          <div
+            className="absolute left-0 top-0 h-px bg-[var(--accent)] transition-[width] duration-500 ease-out"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+      </div>
     </div>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="square" strokeLinejoin="miter">
+      <polyline points="5 12 10 17 19 7" />
+    </svg>
   );
 }
 
