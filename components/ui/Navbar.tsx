@@ -57,22 +57,15 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-3">
-            <Link href="/book" className="hidden md:inline-flex btn btn-primary">
-              <CalendarIcon />
-              Book Now
-            </Link>
-
-            <button
-              aria-label="Menu"
-              onClick={() => setOpen((v) => !v)}
-              className="md:hidden flex flex-col gap-[5px] p-2"
-            >
-              <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "translate-y-[6.5px] rotate-45" : ""}`} />
-              <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-opacity duration-300 ${open ? "opacity-0" : ""}`} />
-              <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
-            </button>
-          </div>
+          <button
+            aria-label="Menu"
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden flex flex-col gap-[5px] p-2"
+          >
+            <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "translate-y-[6.5px] rotate-45" : ""}`} />
+            <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-opacity duration-300 ${open ? "opacity-0" : ""}`} />
+            <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
+          </button>
         </div>
       </nav>
 
@@ -91,26 +84,7 @@ export default function Navbar() {
             {n.label}
           </Link>
         ))}
-        <Link
-          href="/book"
-          onClick={() => setOpen(false)}
-          className="btn btn-primary w-full mt-2"
-        >
-          <CalendarIcon />
-          Book Now
-        </Link>
       </div>
     </>
-  );
-}
-
-function CalendarIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="4" width="18" height="18" rx="2" />
-      <line x1="16" y1="2" x2="16" y2="6" />
-      <line x1="8" y1="2" x2="8" y2="6" />
-      <line x1="3" y1="10" x2="21" y2="10" />
-    </svg>
   );
 }
