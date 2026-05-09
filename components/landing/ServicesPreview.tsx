@@ -126,8 +126,15 @@ export default async function ServicesPreview() {
                           ? `from ${formatPrice(cheapest)}`
                           : "Quote on inspection"}
                       </span>
-                      <span className="text-[0.7rem] uppercase tracking-[0.16em] text-[var(--muted)] group-hover:text-[var(--accent-bright)] transition-colors">
-                        Details →
+                      <span className="inline-flex items-center gap-2.5 pl-3.5 pr-3 py-1.5 border border-[var(--accent)]/45 rounded-[2px] text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[var(--accent-bright)] group-hover:bg-[var(--accent)] group-hover:text-white group-hover:border-[var(--accent)] transition-colors duration-300">
+                        Details
+                        <svg
+                          className="transition-transform duration-300 group-hover:translate-x-0.5"
+                          width="12" height="12" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter"
+                        >
+                          <path d="M5 12h14M13 5l7 7-7 7" />
+                        </svg>
                       </span>
                     </div>
 
