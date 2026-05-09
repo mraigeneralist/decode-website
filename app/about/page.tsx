@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -16,7 +17,7 @@ export default function AboutPage() {
               <span className="block">Decode Detailing.</span>
               <span
                 className="block text-transparent"
-                style={{ WebkitTextStroke: "2px rgba(200,48,46,0.95)" }}
+                style={{ WebkitTextStroke: "2px rgba(226,60,58,0.98)" }}
               >
                 Built for cars.
               </span>
@@ -59,6 +60,73 @@ export default function AboutPage() {
                 </div>
               </ScrollReveal>
             </div>
+          </div>
+        </div>
+
+        <div className="mt-24 max-w-[1240px] mx-auto">
+          <ScrollReveal>
+            <p className="eyebrow mb-4">Inside the Studio</p>
+          </ScrollReveal>
+          <ScrollReveal delay={1}>
+            <h2 className="display text-[clamp(2.2rem,5vw,3.6rem)] mb-8">A space built for paint.</h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-12 gap-px bg-[var(--border)]">
+            <ScrollReveal className="col-span-12 md:col-span-8">
+              <div className="relative aspect-[16/10] bg-[var(--bg-card)] overflow-hidden">
+                <Image
+                  src="/images/hero-image.webp"
+                  alt="Decode Detailing studio interior, LED ceiling and brand wall"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                  className="object-cover"
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={1} className="col-span-12 md:col-span-4">
+              <div className="relative aspect-[16/10] md:aspect-auto md:h-full bg-[var(--bg-card)] overflow-hidden">
+                <Image
+                  src="/images/img-2.webp"
+                  alt="Tata Nexon under studio lights"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={1} className="col-span-6 md:col-span-4">
+              <div className="relative aspect-square bg-[var(--bg-card)] overflow-hidden">
+                <Image
+                  src="/images/img-3.webp"
+                  alt="Honda Amaze polish reflection"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={2} className="col-span-6 md:col-span-4">
+              <div className="relative aspect-square bg-[var(--bg-card)] overflow-hidden">
+                <Image
+                  src="/images/img-4.webp"
+                  alt="Mahindra Thar in the bay"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={3} className="col-span-12 md:col-span-4">
+              <div className="relative aspect-square bg-[var(--bg-card)] overflow-hidden">
+                <Image
+                  src="/images/img-5.webp"
+                  alt="Maruti Swift, finished"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </main>

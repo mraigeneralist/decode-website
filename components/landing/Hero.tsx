@@ -5,12 +5,12 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-[#040404]">
       <Image
-        src="/images/hero-image.webp"
-        alt="Decode Detailing studio interior"
+        src="/images/img-1.webp"
+        alt="Custom orange build at Decode Detailing studio"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center select-none pointer-events-none"
+        className="object-cover object-[center_30%] select-none pointer-events-none"
       />
 
       <div
