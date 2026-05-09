@@ -4,7 +4,7 @@ import { BUSINESS_NAME, BUSINESS_TAGLINE, OWNER_WHATSAPP_NUMBER, INSTAGRAM_URL }
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[#040404] mt-24">
+    <footer className="border-t border-[var(--border)] bg-[var(--footer-bg)] mt-24">
       <div className="max-w-[1240px] mx-auto px-8 max-[640px]:px-5 py-16 grid gap-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <Link href="/" aria-label="Decode Detailing — Home">

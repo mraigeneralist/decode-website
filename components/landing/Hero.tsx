@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#040404]">
+    <section className="relative overflow-hidden bg-[var(--background)]">
       {/* Mobile-only full-bleed image (hidden on md+) */}
       <div className="absolute inset-0 md:hidden">
         <Image
@@ -18,7 +18,7 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(4,4,4,0.85) 0%, rgba(4,4,4,0.7) 30%, rgba(4,4,4,0.55) 55%, rgba(4,4,4,0.92) 100%)",
+              "linear-gradient(180deg, rgba(var(--scrim),0.85) 0%, rgba(var(--scrim),0.7) 30%, rgba(var(--scrim),0.55) 55%, rgba(var(--scrim),0.92) 100%)",
           }}
         />
       </div>
@@ -111,28 +111,28 @@ export default function Hero() {
             className="absolute inset-y-0 left-0 w-1/2 pointer-events-none"
             style={{
               background:
-                "linear-gradient(90deg, rgba(4,4,4,0.98) 0%, rgba(4,4,4,0.7) 35%, rgba(4,4,4,0.25) 75%, rgba(4,4,4,0) 100%)",
+                "linear-gradient(90deg, rgba(var(--scrim),0.98) 0%, rgba(var(--scrim),0.7) 35%, rgba(var(--scrim),0.25) 75%, rgba(var(--scrim),0) 100%)",
             }}
           />
           <div
             className="absolute inset-y-0 right-0 w-32 pointer-events-none"
             style={{
               background:
-                "linear-gradient(270deg, rgba(4,4,4,0.6) 0%, rgba(4,4,4,0) 100%)",
+                "linear-gradient(270deg, rgba(var(--scrim),0.6) 0%, rgba(var(--scrim),0) 100%)",
             }}
           />
           <div
             className="absolute inset-x-0 top-0 h-32 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(4,4,4,0.5) 0%, transparent 100%)",
+                "linear-gradient(to bottom, rgba(var(--scrim),0.5) 0%, transparent 100%)",
             }}
           />
           <div
             className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to top, rgba(4,4,4,0.85) 0%, transparent 100%)",
+                "linear-gradient(to top, rgba(var(--scrim),0.85) 0%, transparent 100%)",
             }}
           />
           {/* Subtle red glow on the image so the shade still reads as branded */}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const NAV_LINKS = [
   { href: "/services", label: "Services" },
@@ -28,9 +29,14 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 inset-x-0 z-[1000] h-[var(--nav-h)] border-b transition-all duration-400 ${
           scrolled
-            ? "bg-[rgba(6,6,6,0.92)] backdrop-blur-[16px] border-[var(--border)]"
-            : "bg-[linear-gradient(to_bottom,rgba(6,6,6,0.7)_0%,rgba(6,6,6,0)_100%)] border-transparent"
+            ? "backdrop-blur-[16px] border-[var(--border)]"
+            : "border-transparent"
         }`}
+        style={
+          scrolled
+            ? { background: "rgba(var(--scrim), 0.92)" }
+            : { background: "linear-gradient(to bottom, rgba(var(--scrim), 0.7) 0%, rgba(var(--scrim), 0) 100%)" }
+        }
       >
         <div className="max-w-[1240px] mx-auto px-8 max-[640px]:px-5 h-full flex items-center justify-between">
           <Link href="/" className="flex items-center" aria-label="Decode Detailing — Home">
@@ -57,22 +63,26 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <button
-            aria-label="Menu"
-            onClick={() => setOpen((v) => !v)}
-            className="md:hidden flex flex-col gap-[5px] p-2"
-          >
-            <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "translate-y-[6.5px] rotate-45" : ""}`} />
-            <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-opacity duration-300 ${open ? "opacity-0" : ""}`} />
-            <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <button
+              aria-label="Menu"
+              onClick={() => setOpen((v) => !v)}
+              className="md:hidden flex flex-col gap-[5px] p-2"
+            >
+              <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "translate-y-[6.5px] rotate-45" : ""}`} />
+              <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-opacity duration-300 ${open ? "opacity-0" : ""}`} />
+              <span className={`block w-[22px] h-[1.5px] bg-[var(--foreground)] transition-transform duration-300 ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
+            </button>
+          </div>
         </div>
       </nav>
 
       <div
-        className={`fixed top-[var(--nav-h)] inset-x-0 z-[999] bg-[rgba(6,6,6,0.97)] backdrop-blur-[16px] border-b border-[var(--border)] px-8 max-[640px]:px-5 py-6 flex-col gap-5 transition-all duration-300 ${
+        className={`fixed top-[var(--nav-h)] inset-x-0 z-[999] backdrop-blur-[16px] border-b border-[var(--border)] px-8 max-[640px]:px-5 py-6 flex-col gap-5 transition-all duration-300 ${
           open ? "flex opacity-100 translate-y-0" : "hidden opacity-0 -translate-y-2"
         }`}
+        style={{ background: "rgba(var(--scrim), 0.97)" }}
       >
         {NAV_LINKS.map((n) => (
           <Link

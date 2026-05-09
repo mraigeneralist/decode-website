@@ -28,6 +28,8 @@ export const viewport: Viewport = {
   themeColor: "#0a0a0a",
 };
 
+const noFlashScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -35,7 +37,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geist.variable} ${bebas.variable} h-full antialiased`}
+      data-theme="dark"
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

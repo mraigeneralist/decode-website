@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-:root {
+:root,
+[data-theme="dark"] {
   --background: #060606;
   --foreground: #f5f5f5;
   --bg-card: #0e0e0e;
@@ -18,9 +19,33 @@
   --destructive: #ef4444;
   --success: #25d366;
   --warning: #f59e0b;
+  --scrim: 4, 4, 4;
+  --footer-bg: #040404;
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --nav-h: 80px;
+}
+
+[data-theme="light"] {
+  --background: #fafafa;
+  --foreground: #0a0a0a;
+  --bg-card: #ffffff;
+  --bg-float: #f3f3f3;
+  --bg-elevated: #ececec;
+  --border: #e8e8e8;
+  --border-mid: #d4d4d4;
+  --border-strong: #aaaaaa;
+  --accent: #c8302e;
+  --accent-bright: #b8201e;
+  --accent-hover: #9c1a18;
+  --accent-glow: rgba(200, 48, 46, 0.14);
+  --muted: #6b6b6b;
+  --muted-2: #4a4a4a;
+  --destructive: #c92a2a;
+  --success: #16a34a;
+  --warning: #d97706;
+  --scrim: 250, 250, 250;
+  --footer-bg: #ececec;
 }
 
 @theme inline {
@@ -59,6 +84,18 @@ body {
   scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.3s var(--ease-spring), color 0.3s var(--ease-spring);
+}
+
+/* Smooth out the surface swap during theme toggle */
+.card,
+.card-flat,
+.card-float,
+input, textarea, select {
+  transition:
+    background-color 0.3s var(--ease-spring),
+    color 0.3s var(--ease-spring),
+    border-color 0.3s var(--ease-spring);
 }
 
 ::selection {
@@ -118,6 +155,12 @@ body {
     linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
   background-size: 60px 60px;
+}
+
+[data-theme="light"] .g-tex {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
 
 .noise {
